@@ -2,7 +2,6 @@
 // Inclure la connexion à la base de données
 include 'db_conn.php';  // Assurez-vous que ce fichier existe et contient la bonne connexion
 session_start();  // Démarrer la session
-
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +11,11 @@ session_start();  // Démarrer la session
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boutique de Fleurs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
         .card img {
             max-height: 200px;
             object-fit: cover;
@@ -23,13 +26,34 @@ session_start();  // Démarrer la session
             background-color: #f8f9fa;
             text-align: center;
         }
+        .header {
+            background-color: #28a745;
+            padding: 20px 0;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
     </style>
 </head>
 <body>
     <!-- En-tête de la boutique -->
-    <div class="container">
-        <h1 class="my-4 text-center">Bienvenue à la Boutique de Fleurs</h1>
+    <div class="header">
+        <h1>Bienvenue à la Boutique de Fleurs</h1>
+        <p>Découvrez notre sélection de fleurs pour toutes les occasions</p>
+    </div>
 
+    <div class="container">
         <!-- Section pour afficher les articles (fleurs) -->
         <div class="row">
             <div class="col-md-8">
@@ -73,27 +97,26 @@ session_start();  // Démarrer la session
             </div>
 
             <div class="col-md-4">
-            <!-- Section de connexion utilisateur -->
-            <h2 class="mb-4">Connexion</h2>
-            <?php
-                        // Afficher un message de bienvenue si l'utilisateur est connecté
-            if (isset($_SESSION['id_utilisateur'])) {
-                echo "<p>Bienvenue, " . $_SESSION['nom'] . " !</p>";
-                echo "<a href='logout.php' class='btn btn-danger'>Se déconnecter</a>";
-            } else {
-                // Si l'utilisateur n'est pas connecté, afficher les liens de connexion et d'inscription
-                echo "<a href='login.php' class='btn btn-success'>Se connecter</a>";
-                echo "<a href='inscription.php' class='btn btn-primary'>S'inscrire</a>";
-            }
+                <!-- Section de connexion utilisateur -->
+                <h2 class="mb-4">Connexion</h2>
+                <?php
+                // Afficher un message de bienvenue si l'utilisateur est connecté
+                if (isset($_SESSION['id_utilisateur'])) {
+                    echo "<p>Bienvenue, " . $_SESSION['nom'] . " !</p>";
+                    echo "<a href='logout.php' class='btn btn-danger'>Se déconnecter</a>";
+                    echo '<form action="utildelete_account.php" method="POST" onsubmit="return confirm(\'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.\');">';
+                    echo '<input type="submit" name="delete_account" value="Supprimer mon compte" class="btn btn-danger mt-2">';
+                    echo '</form>';
+                } else {
+                    // Si l'utilisateur n'est pas connecté, afficher les liens de connexion et d'inscription
+                    echo "<a href='login.php' class='btn btn-success'>Se connecter</a>";
+                    echo "<a href='inscription.php' class='btn btn-primary ml-2'>S'inscrire</a>";
+                }
+                ?>
 
-            ?>
-
-
-            
-            
-        </div>
-    </div>
-</div>
+                <!-- Lien vers le panier -->
+                <a href='panier.php' class='btn btn-primary mt-4'>Voir le panier</a>
+            </div>
         </div>
     </div>
 

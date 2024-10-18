@@ -40,6 +40,8 @@ if (isset($_SESSION['panier']) && count($_SESSION['panier']) > 0) {
     if (isset($_SESSION['id_utilisateur'])) {
         echo "<form method='POST' action='valider_commande.php'>";
         echo "<button type='submit' class='btn btn-primary'>Valider la commande</button>";
+        
+        
         echo "</form>";
     } else {
         echo "<p>Vous devez être connecté pour valider votre commande.</p>";
@@ -49,5 +51,13 @@ if (isset($_SESSION['panier']) && count($_SESSION['panier']) > 0) {
     echo "<p>Votre panier est vide.</p>";
 }
 
+echo "<form method='POST' action='index.php'>";
+echo "<button type='submit' class='btn btn-primary'>Retour</button>";
 mysqli_close($conn);
+
+
 ?>
+
+
+
+
